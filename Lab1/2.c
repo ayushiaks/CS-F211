@@ -14,9 +14,9 @@ void change(int *x, int *y, char s[]){
 int main(){
 	int n;
 	scanf("%d", &n);
-	int count = 1, x=n/2, y=n/2, k=1, r = 1, l = 2, u = 1, d = 2;
+	int count = 1, x=n/2, y=n/2, k=1, r = 1, l = 2, u = 1, d = 2, arr[n][n];
 	
-	int arr[n][n];
+	
 	while(count!=n*n){
 		while((count!=(n*n)+1) && k<=r){
 			arr[x][y] = count++;
