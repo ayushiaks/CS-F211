@@ -10,8 +10,10 @@ typedef struct node{
 	struct node* prev;
 } node;
 
+//track last node added to circular linked list
 node* circularlast;
 
+//Find Kth node from the end
 int knode(node* head, int k, char *s){
 	int l = 0;
 	node* temp = head;
@@ -28,7 +30,7 @@ int knode(node* head, int k, char *s){
 			temp = temp->next;
 			/* code */
 		}
-}
+	}
 	else{
 		while(temp!=circularlast){
 			temp = temp->next;
@@ -54,10 +56,9 @@ void push(node** head, int new, char *s){
 	node* last = *head;
 	newn->data = new;
 	newn->next = NULL;
-			// printf("%lu",strlexn(s));
-
+		
 	if(strcmp(s, "single")==0){
-		// printf("12\n");
+		
 		if(*head == NULL){
 			*head = newn;
 			return;
@@ -69,7 +70,7 @@ void push(node** head, int new, char *s){
 		return;
 	}
 	else if(strcmp(s, "double")==0){
-				// printf("12\n");
+				
 
 		if(*head == NULL){
 			*head = newn;
@@ -84,8 +85,7 @@ void push(node** head, int new, char *s){
 		return;
 	}
 	else if(strcmp(s, "circular")==0){
-				// printf("12\n");
-
+			
 		if(*head == NULL){
 			*head = newn;
 			newn->next = newn;
@@ -101,8 +101,6 @@ void push(node** head, int new, char *s){
 		circularlast = last;
 
 	}
- 
-
 }
 void printlist(node* head, char *s){
 	if(strcmp(s, "circular")==0){
@@ -124,10 +122,11 @@ void printlist(node* head, char *s){
 int main(){
 	node* head = NULL;
 	char *s;
-	// s = malloc(sizeof(char)*50);
-  	scanf("%[^\n]", s);
+	//To know the type of linked list
+	scanf("%[^\n]", s);
 	char tmp = ' ';
 	int x, k;
+	//scan till new line
 	while(tmp!='\n'){
 		scanf("%d", &x);
 		scanf("%c", &tmp);
@@ -140,5 +139,5 @@ int main(){
 	else
 		printf("%d\n", ans);
 	printlist(head, s);
-	// printf("%s\n", s);
+	
 }
