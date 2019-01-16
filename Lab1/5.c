@@ -11,8 +11,7 @@ int l, arr[10];
 
 void search(node *head, int n, int arr[]){
 	node* temp = head;
-	// temp = temp->next;
-	l=0;
+	l = 0;
 	int j=1;
 	while(temp!=NULL){
 		if(temp->data==n){
@@ -64,6 +63,7 @@ void push(node** head, int new){
 
 void swap(node *head, int num){
 	node* temp = head;
+	
 	while(temp->next!=NULL && temp->data!=num){
 		temp = temp->next;
 	}
@@ -86,25 +86,28 @@ void printlist(node* head){
 
 int main(){
 	node *head = NULL;
-	push(&head, 2);
-	push(&head, 9);
-	push(&head, 3);
-	push(&head, 8);
-	push(&head, 3);
-	push(&head, 10);
-	// search(head, 3, arr);
-	// for (int i = 0; i < l; ++i)
-	// {
-	// 	print(arr[i]);
-	// 	printf(" ");
-	// 	/* code */
-	// }
-	// printf("\n");
-	// delete(&head, 8);
-	// printlist(head);
-	// printf("\n");
-	swap(head, 10);
+	char tmp = ' ';
+	int x, k;
+	//scan till new line
+	while(tmp!='\n'){
+		scanf("%d", &x);
+		scanf("%c", &tmp);
+		push(&head, x);
+	}
+	scanf("%d", &k);
+	search(head, k, arr);
+	for (int i = 0; i < l; ++i)
+	{
+		printf("%d ", arr[i]);
+		/* code */
+	}
+	printf("\n");
+	delete(&head, k);
 	printlist(head);
-	// print(l);
-
+	printf("\n");
+	swap(head, 2);
+	printlist(head);
+	printf("\n");
+	print(l);
+	
 }
