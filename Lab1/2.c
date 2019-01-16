@@ -1,5 +1,6 @@
 #include<stdio.h>
 #define p(x) printf("%d\n", x);
+
 void change(int *x, int *y, char s[]){
 	if(s=="left")
 		*y-=1;
