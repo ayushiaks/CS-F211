@@ -25,7 +25,6 @@ char* reverse(char *s){
     }
     return temp; 
 }
-
 char* encode(char *s){
 	int i = 0, j=0, n = strlen(s), x;
 	while(s[i]==' '){
