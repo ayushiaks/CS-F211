@@ -25,7 +25,7 @@ int knode(node* head, int k, char *s){
 		if(k>l)
 			return -1;
 		temp = head;
-		for (int i = 1; i < l-k+1; ++i)
+		for (int i = 1; i < l-k; ++i)
 		{
 			temp = temp->next;
 			/* code */

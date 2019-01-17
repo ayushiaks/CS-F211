@@ -5,11 +5,11 @@
 char* reverse(char *s){
 	char *temp;
 	temp = malloc(sizeof(char)*50);
-	int i=0, n = strlen(s);
+	int i=0, w=0, n = strlen(s);
     while (i<n) { 
        if(s[i]==' '){
-       	temp[i] = s[i];
-       	i++;
+       	temp[w] = s[i];
+       	i++, w++;
        }
        else{
        	int k=0, j;
@@ -18,8 +18,8 @@ char* reverse(char *s){
        	}
        	j = i-1;
        	while(k){
-      		temp[j] = s[j];
-      		j--, k--;
+      		temp[w] = s[j];
+      		j--, k--, w++;
       	}
        }
     }
@@ -86,15 +86,12 @@ char* decode(char s[]){
 	return s;
 }
 
-
-
-
 int main(){
 	char *s;
 	s = malloc(sizeof(char)*50);
   	scanf("%[^\n]", s);
-  	// s = encode(s);
-	s = decode(s);
+  	s = encode(s);
+	// s = decode(s);
 	printf("%s\n", s);
 	// decode(s);
   	
