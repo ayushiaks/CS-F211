@@ -1,107 +1,129 @@
-#include<stdio.h>
-#include<limits.h>
-#include<stdlib.h>
-typedef struct activity{
-	int val;
-	int start;
-	int fin;
-} activity;
 
-int mindistance(int v, int dist[v], int visited[v]){
-	int min = INT_MAX, index;
-	for (int i = 0; i < v; ++i)
-	{
-		if(dist[i]<=min && visited[i]==0)
-			min = dist[i], index = i;
-		/* code */
-	}
-	return index;
+
+#include<stdio.h> 
+  
+// #define V 4 
+  
+#define INF 99999 
+int max = 0;
+void printpath(int v, int path[v][v], int i, int j){
+	if(path[i][j]==i)
+		return;
+	printpath(v, path, i, path[i][j]);
+	printf("%d ", path[i][j]);
 }
 
-void printdist(int v, int dist[v]){
-	for (int i = 0; i < v; ++i)
-	{
-		printf("%d %d\n", i, dist[i]);
-		/* code */
-	}
-}
 
-void dijsktra(int v, int g[v][v], int dist[v]){
-	int visited[v];
-	for (int i = 0; i < v; ++i)
-	{
-		dist[i] = INT_MAX, visited[i] = 0;
-		/* code */
-	}
-	dist[0] = 0;
-	for (int i = 0; i < v-1; ++i)
-	{
-		int u = mindistance(v, dist, visited);
-		visited[u] = 1;
-		
-		for (int w = 0; w < v; ++w)
-		{
-		if(visited[w]==0 && g[u][w]>0 && dist[u]!=INT_MAX && dist[u]+g[u][w]<dist[w])
-			{
-				dist[w] = dist[u]+g[u][w];
-				printf("%d\n", w);
-			}
-		/* code */
-	}
-	
-	// return;
-}
-printdist(v, dist);
-}
+   
+void floydWarshall (int v, int g[v][v]) 
+{ 
+    int dist[v][v], i, j, k, path[v][v];
+    for (int i = 0; i < v; ++i)
+    {
+    	for(int j = 0; j<v; j++)
+    	{
+    		if(g[i][j]!=INF)
+    			path[i][j] = i;
+            else if(i == j)
+                path[i][j] = 0;
+    		else
+    			path[i][j] = -1;
+    	}
+    	/* code */
+    }
+     for (i = 0; i < v; i++) 
+        for (j = 0; j < v; j++) 
+            dist[i][j] = g[i][j]; 
+  
+     for (k = 0; k < v; k++) 
+    { 
+         for (i = 0; i < v; i++) 
+        { 
+        	
+            for (j = 0; j < v; j++) 
+            { 
+                if (dist[i][k] + dist[k][j] < dist[i][j]) 
+                    {
+                    	dist[i][j] = dist[i][k] + dist[k][j]; 
+                    	path[i][j] = path[k][j];
+                    
+                    }
+            } 
+        } 
+    }
+    max = dist[0][0];
+    int u = 0, w = 0;
+    for (int i = 0; i < v; ++i)
+    {
+        for (int j = 0; j < v; ++j)
+        {
+            if(dist[i][j]>max){
+                max = dist[i][j];
+              
+            }
+            /* code */
+        }
+        /* code */
+    }
+     for (int i = 0; i < v; ++i)
+    {
+        for (int j = 0; j < v; ++j)
+        {
+            printf("%d ", dist[i][j]);
+        }
+        printf("\n");
+    }
+    for (int i = 0; i < v; ++i)
+    {
+        for (int j = 0; j < v; ++j)
+        {
+           if(dist[i][j]==max){
+            printf("%d ", i);
+            printpath(v, path, i, j);
+            printf("%d ", j);
+             printf("\n");
+         }
+        }
+       
+    }
+    // printpath(v, path, 0, 5);
+  
+     // printpath(v, path, u, w);
+     printf("\n%d\n", max);
+} 
+  
 
-int main(){
+int main() 
+{ 
 	int v;
 	scanf("%d", &v);
-	int g[v][v], dist[v];
-	for (int i = 0; i < v; ++i)
-	{
-		for(int j = 0; j<v; j++)
-			scanf("%d", &g[i][j]);
-		/* code */
-	}
-	dijsktra(v, g, dist);
-	activity shortest[v*v];
-	int w=0, max = INT_MIN;
-	for (int i = 0; i < v; ++i)
-	{
-		for(int j = i+1; j <v; j++){
-			
-				{
-					shortest[w].val = abs(dist[i]-dist[j]);
-					shortest[w].start = i, shortest[w].fin = j;
-					w++;
-				}
-		}
-		/* code */
-	}
-	for (int i = 0; i < w; ++i)
-	{
-		if(shortest[i].val>max)
-			max = shortest[i].val;
-		/* code */
-	}
-	printf("%d\n", max);
-	for (int i = 0; i < w; ++i)
-	{
-		if(max == shortest[i].val)
-			printf("%d,%d: %d\n", shortest[i].start, shortest[i].fin, shortest[i].val);
-		/* code */
-	}
-	
-}
+    int g[v][v];
+    for (int i = 0; i < v; ++i)
+    {
+    	for(int j = 0; j<v; j++)
+    		scanf("%d", &g[i][j]);
+    	/* code */
+    }
+   	for (int i = 0; i < v; ++i)
+   	{
+   		for(int j = 0; j<v; j++)
+   		{
+
+   			if(g[i][j]==0 && i!=j)
+   				g[i][j] = INF;
+   		}
+   		/* code */
+   	}
+    // Print the solution 
+    floydWarshall(v, g); 
+    
+    return 0; 
+} 
 
 /*
-6
-0 1 0 0 0 0
-1 0 1 1 0 0
-0 1 0 0 0 0
-0 1 0 0 1 0
-0 0 0 1 0 1
-0 0 0 0 1 0
-
+4
+0 1 0 0
+0 0 1 0
+1 0 0 1
+0 1 0 0
 */

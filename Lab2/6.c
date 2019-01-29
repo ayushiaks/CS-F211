@@ -4,30 +4,18 @@
 
 
 
-void dfs(int i, int v, int visited[v], int g[v][v]){
+void dfs(int i, int v, int visited[v], int g[v][v], int vertex[v]){
 	visited[i] = 1;
-	
+	vertex[i] = 1;
 	for (int j = 0; j < v; ++j)
 	{
 		if(!visited[j] && g[i][j]==1)
-			dfs(j, v, visited, g);
+			dfs(j, v, visited, g, vertex);
 		/* code */
 	}
 }
 
-void dfsprint(int i, int v, int visited[v], int g[v][v]){
-	visited[i] = 1;
-	printf("%d ", i);
-	for (int j = 0; j < v; ++j)
-	{
-		if(!visited[j] && g[i][j]==1)
-			{
-				dfs(j, v, visited, g);
-				printf("\n");
-			}
-		/* code */
-	}
-}
+
 
 int main(){
 
@@ -92,48 +80,56 @@ int main(){
 
 		/* code */
 	}
-
+	int vertex[v];
+	memset(vertex, 0, sizeof(vertex));
 	for (int i = 2; i < edge; ++i)
 	{
 		int w = 0, temp[edge-2], visited[edge-2], count = 0;
 		memset(visited, 0, sizeof(visited));
-		for(int j = 2; j< edge; j++)
+		int matrix[v][v];
+		for (int w = 0; w < v; ++w)
 			{
-				temp[w++] = gdash[i][j];
-				gdash[i][j] = 0, gdash[j][i] = 0;	
-
+				for(int j = 0; j < v; j++)
+				matrix[w][j] = gdash[w][j], matrix[i][j] = matrix[j][i] = -1;
+					/* code */
 			}
+		
 		for (int j = 2; j < edge; ++j)
 		{
 			if(!visited[j])
 			{
-				dfs(j, v, visited, gdash);
+				dfs(j, v, visited, gdash, vertex);
 				count++;
 			}
-		}
+		
 		if(count>=2){
-			printf("%d\n\n", i);
-			memset(visited, 0, sizeof(visited));
-			for (int j = 2; j < edge; ++j)
-			{
+				printf("%d\n", i);
 				
-				if(!visited[j])
+			
+				printf("\n");
+				for (int w = 0; w < v; ++w)
 				{
-					dfsprint(j, v, visited, gdash);
-					
+					if(vertex[w]==0){
+						for(int j = 0; j < v; j++){
+							matrix[w][j] = -1, matrix[j][w] = -1;
+						}
+					}
+					/* code */
 				}
-				// printf("\n");
-			}
-		w=0;
-		for (int j = 2; j < edge; ++j)
-		{
-			gdash[i][j] = temp[w], gdash[j][i] = temp[w++];
-			/* code */
+				for (int w = 0; w < v; ++w)
+				{
+					for(int j = 0; j < v; j++){
+						if(matrix[w][j]!=-1)printf("%d ", matrix[w][j]);
+					}
+					printf("\n");
+				}
+				break;
+		
 		}
+
+		memset(vertex, 0, sizeof(vertex));
 	}
-	printf("%d\n", edge-2);
-
-
+	
 }
 }
 

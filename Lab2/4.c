@@ -2,12 +2,12 @@
 #include<stdlib.h>
 #include<string.h>
 typedef struct node{
-	int val;
+	int val, col;
 	struct node* prev;
 	struct node* next;
 } node;
 
-int max=0;
+int max=0, l=0;
 void push(node **head, int x, int y, int z){
 	node * newn = (node*)malloc(sizeof(node));
 	newn->val = x;
@@ -22,7 +22,6 @@ void push(node **head, int x, int y, int z){
 		return;
 	}
 	
-		
 	while(temp->next!=NULL &&temp->next->val!=z){
 		temp = temp->next;
 	}
@@ -48,15 +47,12 @@ void detectcycleutil(node *temp, int cycle[max+1]){
 		visited[temp->val] = 1;
 		if(temp->prev->val==num &&cycle[temp->val]==0)
 			{
-				// printf("in\n");
 				flag = 1;
 				cycle[temp->val] = 1;
-				// break;
 			}
 			temp = temp->next;
 	
 	if(flag == 1){
-		// printf("in\n");
 		for (int i = 0; i <= max; ++i)
 		{
 			if(visited[i]>0)
@@ -100,6 +96,51 @@ void printback(node *head){
 	}
 }
 
+void length(node *head){
+	node *temp = head;
+	while(temp!=NULL){
+		temp = temp->next;
+		l++;
+	}
+}
+
+
+void coloring(node *head){
+	node *temp = head;
+	int color[l+1], prevcolor=1, max;
+	temp->col = 1;
+	temp= temp->next;
+	while(temp!=NULL){
+		int c = 0, maxi = 0, i;
+		memset(color, 0, sizeof(color));
+		color[prevcolor]=1;
+		color[temp->prev->col] = 1;
+		
+		for (i = 1; i <= l; ++i)
+		{
+			if(color[i]==0)
+				{
+					c = i;
+					break;
+				}
+		}
+		if(c==0)
+			temp->col = 2;
+		else
+			temp->col = c;
+		
+		prevcolor = temp->col;
+		temp = temp->next;
+	}
+
+	temp = head;
+	while(temp!=NULL){
+		printf("%d ", temp->col);
+		temp = temp->next;
+	}
+
+}
+
 int main(){
 	node* head = NULL;
 	int x=0, y, z;
@@ -113,7 +154,9 @@ int main(){
 		push(&head, x, y, z);
 
 	}
-	detectcycle(head);
+	length(head);
+	// detectcycle(head);
+	coloring(head);
 	// printback(head);
 }
 
@@ -124,5 +167,14 @@ int main(){
 3 2 4
 4 2 5
 5 4 0.
+
+1 0 2
+2 1 3
+3 1 4
+4 2 5
+5 3 6
+6 5 7
+7 3 0.
+
 
 */

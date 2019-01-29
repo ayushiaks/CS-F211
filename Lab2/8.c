@@ -1,124 +1,78 @@
-#include<stdio.h>
-#include<limits.h>
+#include <stdio.h>
+#define max(a, b) (a>b?a:b)
 
+int n,e,t,matrix[100][100]={{0}}, check[100]={0}, visited[100] = {0}, tmp = 0;
 
-int mindistance(int v, int dist[v], int visited[v]){
-	int min = INT_MAX, index;
-	for (int i = 0; i < v; ++i)
+void dfs(int node, int count, int origin)
+{
+	if(visited[node] == 1)
+		return;
+	visited[node] = 1;
+	// printf("node %d\n", node);
+	if(count == t)
 	{
-		if(dist[i]<=min && visited[i]==0)
-			min = dist[i], index = i;
-		/* code */
+		printf("count: %d, t: %d\n", count, t);
+		printf("checked %d, %d\n", origin, node);
+		tmp++;
+		check[node] = 1;
+		check[origin] = 1;
+		return;
 	}
-	return index;
+	for(int i=0;i<n;i++)
+	{
+		if(matrix[node][i]==1 && count <= t)
+		{
+			dfs(i, count+1, origin);
+		}
+	}
+	printf("\n");
 }
 
-void printdist(int v, int dist[v]){
-	for (int i = 0; i < v; ++i)
+int main()
+{
+	int i,j,k,e,u,v;
+	scanf("%d %d", &n, &e);
+	int maxi = 0;
+	for(i=0;i<e;i++)
 	{
-		printf("%d %d\n", i, dist[i]);
-		/* code */
+		scanf("%d %d", &u, &v);
+		maxi = max(maxi, max(u, v));
+		matrix[u][v] = matrix[v][u] = 1;
 	}
-}
-
-int dijsktra(int v, int g[v][v],  int t){
-	int dist[v], visited[v], count=0;
-	for (int n = 0; n < v; ++n)
+	scanf("%d", &t);
+	n = maxi+1;
+	for(i=0;i<n;i++)
 	{
-			
-		for (int i = 0; i < v; ++i)
-		{
-			dist[i] = INT_MAX, visited[i] = 0;
-			/* code */
-		}
-		dist[n] = 0;
-		for (int i = 0; i < v-1; ++i)
-		{
-			int u = mindistance(v, dist, visited);
-			visited[u] = 1;
-			
-			for (int w = 0; w < v; ++w)
-			{
-			if(visited[w]==0 && g[u][w]>0 && dist[u]!=INT_MAX && dist[u]+g[u][w]<dist[w])
-				{
-					dist[w] = dist[u]+g[u][w];
-					// printf("%d\n", w);
-				}
-			/* code */
-			}
-		}
-		for (int i = 0; i < v; ++i)
-		{
-			if(dist[i]==t)
-				count++;
-			/* code */
-		}
-		
-	// return;
+		printf("visiting %d\n", i);
+		dfs(i,0,i);
+		for(j=0;j<n;j++)
+			visited[j]=0;
 	}
-	
-return count;
-}
-
-int main(){
-	int v, t, m, a, b;
-	scanf("%d %d", &v, &t);
-	int g[v][v];
-	for (int i = 0; i < v; ++i)
+	int c=0;
+	for(i=0;i<n;i++)
 	{
-		for (int j = 0; j < v; ++j)
-		{
-			g[i][j] = 0;
-			/* code */
-		}
-		// printf("\n");
-		/* code */
+		if(check[i] == 1)
+			c++;
 	}
-	for (int i = 0; i < v-1; ++i)
-	{
-		
-			scanf("%d %d", &a, &b);
-			g[a][b] = 1;
-			g[b][a] = 1;
-			
-			
-	}
-
-	for (int i = 0; i < v; ++i)
-	{
-		for (int j = 0; j < v; ++j)
-		{
-			printf("%d ", g[i][j]);
-			/* code */
-		}
-		printf("\n");
-		/* code */
-	}
-	// scanf("%d", &m);
-	
-	
-	printf("%d\n", dijsktra(v, g, t));
+	printf("%d\n", tmp/2);
+	return 0;
 }
 
 /*
-9
-0 4 0 0 0 0 0 8 0
-4 0 8 0 0 0 0 11 0
-0 8 0 7 0 4 0 0 2
-0 0 7 0 9 14 0 0 0
-0 0 0 9 0 10 0 0 0 
-0 0 4 14 10 0 2 0 0
-0 0 0 0 0 2 0 1 6
-8 11 0 0 0 0 1 0 7
-0 0 2 0 0 0 6 7 0
-
 6
-0 1
+5
 1 2
 1 3
-3 4
-4 5
+2 4
+2 5
+3 8
 2
-3
+
 5
+4
+0 1
+1 2
+2 3
+1 4
+2
 */
