@@ -1,128 +1,86 @@
 #include<stdio.h>
 #include<limits.h>
 
-#include <bits/stdc++.h> 
-using namespace std; 
+// #inclc  namespace std; 
   
-// Size of given matrix 
-#define N 5 
-  
-// A O(n^2) function to the maximum sum sub- 
-// squares of size k x k in a given square 
-// matrix of size n x n 
+ 
+int globalmax= INT_MIN, mat[10][10], N;
 void printMaxSumSub(int mat[][N], int k) 
 { 
-    // k must be smaller than or equal to n 
     if (k > N) return; 
   
-    // 1: PREPROCESSING 
-    // To store sums of all strips of size k x 1 
-    int stripSum[N][N]; 
+    int stripSum[N][N], max_sum = INT_MIN; 
   
-    // Go column by column 
     for (int j=0; j<N; j++) 
     { 
-        // Calculate sum of first k x 1 rectangle 
-        // in this column 
-        int sum = 0; 
+         int sum = 0; 
         for (int i=0; i<k; i++) 
             sum += mat[i][j]; 
         stripSum[0][j] = sum; 
   
-        // Calculate sum of remaining rectangles 
-        for (int i=1; i<N-k+1; i++) 
+       for (int i=1; i<N-k+1; i++) 
         { 
             sum += (mat[i+k-1][j] - mat[i-1][j]); 
             stripSum[i][j] = sum; 
         } 
     } 
   
-    // max_sum stores maximum sum and its 
-    // position in matrix 
-    int max_sum = INT_MIN, *pos = NULL; 
+     // int  *pos = NULL; 
   
-    // 2: CALCULATE SUM of Sub-Squares using stripSum[][] 
-    for (int i=0; i<N-k+1; i++) 
+   for (int i=0; i<N-k+1; i++) 
     { 
-        // Calculate and print sum of first subsquare 
-        // in this row 
-        int sum = 0; 
+       int sum = 0; 
         for (int j = 0; j<k; j++) 
             sum += stripSum[i][j]; 
   
-        // Update max_sum and position of result 
         if (sum > max_sum) 
         { 
             max_sum = sum; 
-            pos = &(mat[i][0]); 
+            // pos = &(mat[i][0]); 
         } 
   
-        // Calculate sum of remaining squares in 
-        // current row by removing the leftmost 
-        // strip of previous sub-square and adding 
-        // a new strip 
+       
         for (int j=1; j<N-k+1; j++) 
         { 
             sum += (stripSum[i][j+k-1] - stripSum[i][j-1]); 
   
-            // Update max_sum and position of result 
             if (sum > max_sum) 
             { 
                 max_sum = sum; 
-                pos = &(mat[i][j]); 
+                // pos = &(mat[i][j]); 
             } 
         } 
     } 
-  
-    // Print the result matrix 
-    for (int i=0; i<k; i++) 
-    { 
-        for (int j=0; j<k; j++) 
-            cout << *(pos + i*N + j) << " "; 
-        cout << endl; 
-    } 
-} 
-  
-// Driver program to test above function 
-int main() 
-{ 
-    int mat[N][N] = {{1, 1, 1, 1, 1}, 
-        {2, 2, 2, 2, 2}, 
-        {3, 8, 6, 7, 3}, 
-        {4, 4, 4, 4, 4}, 
-        {5, 5, 5, 5, 5}, 
-    }; 
-    int k = 3; 
-   
-    cout << "Maximum sum 3 x 3 matrix is\n"; 
-    printMaxSumSub(mat, k); 
-  
-    return 0; 
+  	if(max_sum > globalmax)
+  		globalmax = max_sum;
+    // for (int i=0; i<k; i++) 
+    // { 
+    //     for (int j=0; j<k; j++) 
+    //         // cout << *(pos + i*N + j) << " "; 
+    //     cout << endl; 
+    // } 
 } 
 
-int main(){
-	int n;
-	scanf("%d", &n);
-	int arr[n][n];
+void allk(int n){
 	for (int i = 0; i < n; ++i)
 	{
-		for(int j = 0; j < n ;j++)
-			scanf("%d", &arr[i][j]);
-	}
-	for (int i = 0; i < n; ++i)
-	{
-		int sum = arr[0][i];
-		for(int j = 0; j < n ;j++)
-			{
-				sum+=arr[j][i];
-				arr[j][i] = sum;
-			}
-		}
-
-	for (int i = 0; i < n; ++i)
-	{
-		
+		printMaxSumSub(mat, 3);
 		/* code */
 	}
+}
+
+
+
+int main(){
+	// int n;
+	scanf("%d", &N);
+	// int arr[n][n];
+	for (int i = 0; i < N; ++i)
+	{
+		for(int j = 0; j < N ;j++)
+			scanf("%d", &mat[i][j]);
+	}
+	allk(N);
+	printf("%d\n", globalmax);
 
 }
