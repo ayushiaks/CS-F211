@@ -90,6 +90,7 @@ int main(){
 			{
 				for(int j = 0; j < v; j++){
 					if(matrix[w][j]!=-1)printf("%d ", matrix[w][j]);
+					else printf("%d ", 0);
 				}
 				printf("\n");
 			}
