@@ -54,3 +54,13 @@ int main(){
 	printf("%d\n", isbipartite(v, g));
 }
 }
+
+/*
+1  
+4
+0 1 0 1
+1 0 1 0
+0 1 0 1
+1 0 1 0
+yes
+*/
