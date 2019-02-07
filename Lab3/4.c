@@ -1,61 +1,74 @@
+
 #include<stdio.h>
-#include<stdlib.h>
 #include<string.h>
-#define INF 99999
-int visited[100], flag, count, x, y, v, g[100][100], check[100][100];
+#include<limits.h>
+#include<stdlib.h>
+#include<stdbool.h>
 
-void dfs(int i, int j){
-	
-	if(i==j)
-		return;
-	visited[i]=1;
-	if(check[i][j]==0){
-		count++;
-		printf("plus %d %d\n", i, j);
-		if(i==x){
-		flag = 1;
-		}
-		if(j==y && flag==1){
-			printf("minus %d %d\n", i, j);
-			count--;
-			flag = 0;
-		}
-	}
-	check[i][j] = 1;
-	for(int w = i+1;w<= v; w++){
-		if(!visited[w] && g[i][w] )
-			{
-				dfs(w, j);
-			}
+#define null NULL
+#define f(i,x,y) for(int i=x;i<y;i++)
 
-	}
+int g[100][100], n;
+int vis[100];
+int posX, posY, x, y, foundX;
+
+
+void dfs(int v, int k, int pos)
+{
+    vis[v] = 1;
+    if(v==x)
+    {
+        posX = pos;
+        foundX = 1;
+    }
+
+    if(v==y)
+        posY = pos;
+
+    if(v==k)
+        return;
+    // printf("%d ", v);
+    for(int i=1;i<=n;i++)
+        if(g[v][i]&&!vis[i])
+            dfs(i, k, pos+1);
 }
 
- int main(){
- 	int a, b;
- 	scanf("%d %d %d", &v, &x, &y);
- 	for (int i = 1; i <= v-1; ++i)
- 	{
- 		scanf("%d %d", &a, &b);
- 		g[a][b] = 1;
- 		g[b][a] = 1;
- 		/* code */
- 	}
- 	
- 	for (int i = 1; i <= v; ++i)
- 	{
- 		// count--;
- 		for(int j = 1; j<=v;j++){
- 		if(i!=j){
- 			
- 			dfs(i, j);
- 		}
- 		/* code */
- 		
- 	}
- 	memset(visited, 0, sizeof(visited));
- 	}
- 	printf("%d\n", count);
- }
+int main()
+{
+    scanf("%d %d %d", &n, &x, &y);
+    int cnt = 0;
+    f(i,0,n-1)
+    {
+        int x, y;
+        scanf("%d %d", &x, &y); 
+        g[x][y] = 1;
+        g[y][x] = 1;
+    }
+    printf("\n");
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=n;j++)
+        {
+            if(i!=j)
+            {
+               
+                dfs(i,j,0);
+                // printf("%d\n", j);
+                // printf("%d %d\n", posX, posY);
+                if(posX>=posY||(!foundX))
+                {
+                    printf("%d %d\n", i, j);
+                    cnt++;
+                }
 
+                memset(vis,0,sizeof(vis));
+                posX = 0;
+                posY = 0;
+                foundX = 0;
+            }
+        }
+    }
 
+    printf("%d", cnt);
+
+}
