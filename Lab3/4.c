@@ -22,13 +22,9 @@ void dfs(int i, int j){
 		}
 	}
 	check[i][j] = 1;
-	
-	
-	
 	for(int w = i+1;w<= v; w++){
 		if(!visited[w] && g[i][w] )
 			{
-				// check[w][j] = 1;
 				dfs(w, j);
 			}
 

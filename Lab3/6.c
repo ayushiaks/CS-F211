@@ -6,7 +6,7 @@ int main(){
 	char *s;
 	s = (char*)malloc(sizeof(char)*10);
 	scanf("%[^\n]", s);
-	int l = strlen(s), ans = 1;
+	int l = strlen(s), ans = 1, count = 0;
 	int arr[27];
 	memset(arr, 0, sizeof(arr));
 	for (int i = 0; i < l; ++i)
@@ -17,17 +17,20 @@ int main(){
 
 	for (int i = 0; i <= 26; ++i)
 	{
-		if(arr[i]!=0 && arr[i]!=1 && arr[i]%2!=0)
+		
+		
+		if(arr[i]!=0 && arr[i]%2!=0)
+		{
+			count++;
+		}
+		if(count>1)
 		{
 			ans = 0;
 			break;
 		}
 		/* code */
 	}
-	// for (int i = 0; i <= 26; ++i)
-	// {
-	// 	printf("%d ", arr[i] );
-	// }
+	
 	if(ans==0)
 		printf("NO\n");
 	else
