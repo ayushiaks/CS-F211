@@ -8,7 +8,7 @@ typedef struct node{
 	struct node *next;
 } node;
 
-int l, check[100];
+int l, check[101];
 
 void push(int x, node** head){
 	node *temp = *head;
@@ -66,12 +66,11 @@ void change(node *head, int k){
 		check[k*i] = 1;
 		i++;
 	}
-
+	
 	for (int j = l; j >=1; --j)
 	{
-		
-		if(check[j]==0){
-			num = search(j, head);
+		num = search(j, head);
+		if(check[j]!=1){
 			push(num, &new);
 		}
 
@@ -87,12 +86,14 @@ int main(){
 	node *head = NULL;
 	scanf("%d", &k);
 	char tmp = ' ';
-	
+	// memset(check, -1, sizeof(check));
 	//scan till new line
 	while(tmp!='\n'){
 		scanf("%d%c", &x, &tmp);
+		check[x] = 0;
 		push(x, &head);
 	}
+	
 	length(head);
 	change(head, k);
 	

@@ -1,43 +1,40 @@
 #include<stdio.h>
 #include<string.h>
+#define max(a, b) (a>b?a:b)
+
+int g[100][100], visited[100][100], n;
+
+int area(int i, int j){
+	if(i<0 || i>=n || j<0|| j>=n || visited[i][j] || !g[i][j])
+		return 0;
+	visited[i][j] = 1;
+	return (1+area(i-1, j)+area(i+1, j)+area(i, j-1)+area(i, j+1)+area(i+1, j+1)+area(i-1, j-1)+area(i+1, j-1)+area(i-1, j+1));
+
+}
+
 
 int main(){
-	int n;
+	int ans = 0;
 	scanf("%d", &n);
-	int arr[n+2][n+2], check[n+2][n+2], count = 0;
-	memset(arr, 0, sizeof(arr));
-	memset(check, 0, sizeof(check));
-	for (int i = 1; i <= n; ++i)
+	
+	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 1; j <= n; ++j){
-			scanf("%d", &arr[i][j]);
+		for (int j = 0; j < n; ++j){
+			scanf("%d", &g[i][j]);
 		}
 		/* code */
 	}
 			
-	for (int i = 1; i <= n; ++i)
+	for (int i = 0; i < n; ++i)
 	{
-		for (int j = 1; j <= n; ++j){
-			if(arr[i][j]==1){
-				int sum = i+j;
-				if((arr[i-1][j]==1 || arr[i+1][j] == 1 || arr[i][j-1] == 1 || arr[i][j+1] == 1)){
-					// printf("%d %d\n", i, j);
-					check[i][j] = 1;
-					count++;
-				}	
-				for (int w = 1; w < sum; ++w)
-				{
-					if(check[i][j]!=1 && arr[w][sum-w]==1 && w!=i && (sum-w)!=j)
-						{
-								// printf("sum %d %d\n", w, sum-w);
-								count++;
-								check[i][j] = 1;
-						}
-					/* code */
-				}
-			}	
+		for (int j = 0; j < n; ++j){
+			// printf("%d\n", area(i, j));
+			int t = area(i,j);
+			if(ans<t)
+				ans = t;
 		}
+			
 	}
 
-	printf("%d\n", count);
+	printf("%d\n", ans);
 }
