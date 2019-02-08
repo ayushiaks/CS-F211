@@ -14,17 +14,17 @@ int binarysearch(int lo, int hi){
 	if(mid%2==0)
 	{
 		if(arr[mid] == arr[mid+1]){
-			binarysearch(mid+2, hi);
+			return binarysearch(mid+2, hi);
 		}
 		else
-			binarysearch(lo, mid);
+			return binarysearch(lo, mid);
 	}
 	else{
 		if(arr[mid-1] == arr[mid]){
-			binarysearch(mid+1, hi);
+			return binarysearch(mid+1, hi);
 		}
 		else
-			binarysearch(lo, mid-1);
+			return binarysearch(lo, mid-1);
 	}
 
 }
