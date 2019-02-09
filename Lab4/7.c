@@ -31,8 +31,7 @@ int main(){
 	for (int i = 0; i < n; ++i)
 	{
 		s(arr[i]);
-		mini = min(mini, arr[i]);
-		if(arr[i]==mini)
+		if(i!=0 && arr[i]<arr[i-1])
 			pivot = i;
 		/* code */
 	}
