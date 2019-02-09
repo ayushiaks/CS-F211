@@ -9,6 +9,10 @@
 
 int pivot, n, arr[100000], mini= INT_MAX, flag1, flag2;
 
+int compare(const void *a, const void *b){
+	return (*(int*)a-*(int*)b);
+}
+
 int binarysearch(int lo, int hi, int x){
 	int mid = (lo+hi)/2;
 	
@@ -38,7 +42,7 @@ int main(){
 
 	int ans, d;
 	s(d);
-	
+	qsort(arr, n, sizeof(int), compare);
 	for (int i = 0; i < n; ++i)
 	{
 		ans = binarysearch(i, n-1, arr[i]+d);
