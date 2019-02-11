@@ -61,6 +61,7 @@ int main(){
 	}
 	dijsktra(v, g);
 }
+int main(){
 
 /*
 9
