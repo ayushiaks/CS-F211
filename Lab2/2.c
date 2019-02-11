@@ -65,14 +65,14 @@ void floydWarshall (int v, int g[v][v])
         }
         /* code */
     }
-     for (int i = 0; i < v; ++i)
-    {
-        for (int j = 0; j < v; ++j)
-        {
-            printf("%d ", dist[i][j]);
-        }
-        printf("\n");
-    }
+    //  for (int i = 0; i < v; ++i)
+    // {
+    //     for (int j = 0; j < v; ++j)
+    //     {
+    //         printf("%d ", dist[i][j]);
+    //     }
+    //     printf("\n");
+    // }
     for (int i = 0; i < v; ++i)
     {
         for (int j = 0; j < v; ++j)

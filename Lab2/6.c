@@ -133,7 +133,7 @@ int main(){
 					{
 						for(int j = 0; j < edge; j++){
 							if(matrix[w][j]!=-1) printf("%d ", matrix[w][j]);
-							// else printf("%d ", 0);
+							else printf("%d ", 0);
 							if(matrix[w][j]==1) p =1;
 						}
 						printf("\n");
