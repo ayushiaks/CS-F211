@@ -35,7 +35,7 @@ int main(){
 		{
 			/* code */
 			if(mini>arr[i][j])
-				mini = arr[i][j], in = j;
+				mini = arr[i][j];
 		}
 		for (int j = 0; j < n; ++j)
 		{
