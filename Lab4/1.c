@@ -41,11 +41,15 @@ void bs(int lo, int hi){
 		c = cost(mid);
 		if(c>budget)
 			{
-				hi = mid;				
+				hi = mid;
+				if(lo>=hi)
+					lo = mid-1;
+				hi = mid;					
 			}
 		else if(c<=budget){
 			lo = mid+1;
 		}
+		
 
 	}
 	p(mid)
@@ -55,7 +59,7 @@ void bs(int lo, int hi){
 }
 
 int main(){
-	// int high=0;
+	
 	s(n);
 	s(budget);
 	for (int i = 1; i <= n; ++i)
@@ -63,5 +67,5 @@ int main(){
 		s(arr[i])
 		
 	}
-	bs(0, n);
+	bs(0, n+1);
 }
