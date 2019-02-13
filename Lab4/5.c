@@ -28,11 +28,12 @@ int bs(int lo, int hi){
 		// p(items)
 		if(items < m)
 			lo = mid+1;
-		else
+		else if(items > m)
 			hi = mid;
+		else
+			return mid;
 
 	}
-	return mid;
 }
 
 int main(){

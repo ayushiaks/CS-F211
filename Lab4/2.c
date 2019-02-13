@@ -30,11 +30,13 @@ int bs(int lo, int hi){
 		if(temp<n){
 			lo = mid+1;
 		}
+		else if(mid==n)
+			return mid;
 		else{
 			hi = mid;
 		}
 	}
-	return hi;
+	
 }
 
 int main(){

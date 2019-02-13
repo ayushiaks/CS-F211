@@ -26,6 +26,22 @@ int binarysearch(int lo, int hi){
 	return -1;
 }
 
+int findpivot(int lo, int hi){
+	int mid;
+	if(hi < lo)
+		return -1;
+	if(hi == lo)
+		return lo;
+	mid = (lo+hi)/2;
+	if(mid<hi && arr[mid]>arr[mid+1]) 
+		return mid;
+	else if(lo<mid && arr[mid]<arr[mid-1])
+		return mid-1;
+	else
+		return findpivot(lo, mid-1);
+	return findpivot(mid+1, hi);
+}
+
 int main(){
 	s(n);
 	for (int i = 0; i < n; ++i)
@@ -36,9 +52,17 @@ int main(){
 		/* code */
 	}
 	s(x);
-	int ans = binarysearch(0, pivot-1);
-	if(ans==-1)
-	ans = binarysearch(pivot, n-1);
+
+	pivot = findpivot(0, n-1);
+	int ans;
+	pivot = findpivot(0, n-1);
+	if(pivot == -1)
+		ans = binarysearch(0, n-1);
+	else{
+		ans = binarysearch(0, pivot);
+		if(ans==-1)
+			ans = binarysearch(pivot+1, n-1);
+	}
 	p(ans);
 	
 }
