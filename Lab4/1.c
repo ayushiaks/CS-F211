@@ -6,7 +6,7 @@
 
 #define max(a, b) (a>b?a:b);
 #define p(x) printf("%d\n", x);
-#define p2(x, y, z, w) printf("%d %d %d %d\n", x, y, z, w);
+#define p2(x, y, z) printf("%d %d %d\n", x, y, z);
 #define s(x) scanf("%d", &x);
 
 int budget, c, n, arr[100000], k, mini= INT_MAX, flag1, flag2;
@@ -35,25 +35,29 @@ int cost(int k){
 
 
 void bs(int lo, int hi){
-	int mid;
+	int mid, ans, ansc;
 	while(lo<hi){
 		mid = (lo+hi)/2;
 		c = cost(mid);
+		// printf("%d %d\n",mid, c);
 		if(c>budget)
 			{
+				p2(lo, mid, hi);
 				hi = mid;
-				if(lo>=hi)
-					lo = mid-1;
-				hi = mid;					
+				if(lo>=hi){
+					break;
+				}
+				// hi = mid;					
 			}
 		else if(c<=budget){
 			lo = mid+1;
 		}
 		
+		ans = mid, ansc = c;
 
 	}
-	p(mid)
-	p(c);
+	p(ans)
+	p(ansc);
 
 	
 }
@@ -67,5 +71,5 @@ int main(){
 		s(arr[i])
 		
 	}
-	bs(0, n+1);
+	bs(1, n+1);
 }

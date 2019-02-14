@@ -37,7 +37,7 @@ int findpivot(int lo, int hi){
 		return mid;
 	else if(lo<mid && arr[mid]<arr[mid-1])
 		return mid-1;
-	else
+	else																																																																																																																																
 		return findpivot(lo, mid-1);
 	return findpivot(mid+1, hi);
 }
@@ -53,7 +53,7 @@ int main(){
 	}
 	s(x);
 
-	pivot = findpivot(0, n-1);
+	// pivot = findpivot(0, n-1);
 	int ans;
 	pivot = findpivot(0, n-1);
 	if(pivot == -1)
