@@ -35,9 +35,7 @@ int main(){
 	for (int i = 0; i < n; ++i)
 	{
 		s(arr[i]);
-		if(i!=0 && arr[i]<arr[i-1])
-			pivot = i;
-		/* code */
+		
 	}
 
 	int ans, d;
