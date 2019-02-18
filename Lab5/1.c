@@ -9,7 +9,7 @@
 #define p2(x, y, z) printf("%d %d %d\n", x, y, z);
 #define s(x) scanf("%d", &x);
 
-int n, arr[10], count=0;
+int n, arr[20], count=0;
 
 int main(){
 	int t;
@@ -18,7 +18,7 @@ int main(){
 		s(n);
 		char *name[2] = {"IM", "CA"};
 		char *ans[n];
-		int arr[10], counter = 1, size = 0, count[2], flag = 1;
+		int arr[20], counter = 1, size = 0, count[2], flag = 1;
 		memset(arr, -1, sizeof(arr));
 		memset(count, 0, sizeof(count));
 		for (int i = 0; i < n; ++i)
