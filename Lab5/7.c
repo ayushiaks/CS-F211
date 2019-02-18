@@ -35,6 +35,14 @@ int main(){
 		/* code */
 	}
 	qsort(p, n, sizeof(pair), compare);
+	for (int i = 0; i < n-1; ++i)
+	{
+		if(abs(p[i].val-p[i+1].val)>1)
+			{
+				p(-1)
+				exit(0);
+			}
+	}
 	for (int i = 0; i < n; ++i)
 	{
 		for (int j = i+1; j < n; ++j)
