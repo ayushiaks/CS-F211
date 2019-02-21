@@ -27,17 +27,7 @@ int main(){
 	}
 	qsort(arr, n, sizeof(int), compare);
 	int y = sum%3, count = 0;
-	// for (int i = 0; i < n; ++i)
-	// {
-	// 	p2(i, arr[i])
-	// 	/* code */
-	// }
-	// // }
-	// p(n)
-	// p(arr[4])
 	for(int i = n-1; i>=0; i--){
-		// p(arr[i])
-		// p(i)
 		if(arr[i]%3==y)
 			{
 				// p2(1, i)
