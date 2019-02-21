@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 
 #define max(a, b) (a>b?a:b);
 #define p(x) printf("%d\n", x);
@@ -67,15 +68,17 @@ void push(node** head, int new){
 	}
 
 void swap(node *head, int a, int b){
-	node* temp = head;
+	node* temp1 = head, *temp2 = head;
 	
-	while(temp->next!=NULL && temp->data!=num){
-		temp = temp->next;
+	while(temp1->next!=NULL && temp1->data!=a){
+		temp1 = temp1->next;
 	}
-	if(temp->next == NULL) return;
-	int x = temp->data;
-	temp->data = temp->next->data;
-	temp->next->data = x;
+	while(temp2->next!=NULL && temp2->data!=b){
+		temp2 = temp2->next;
+	}
+	if(temp1->next == NULL) return;
+	if(temp2->next == NULL) return;
+	temp1->data = b, temp2->data = a;
 	return;
 }
 
@@ -118,8 +121,16 @@ int main(){
 		scanf("%c", &tmp);
 		push(&head, x);
 	}
-	sort(head);
-	printlist(head);
+	
+	while(1){
+		char *s;
+	scanf("%s", s);
+	// if(strcmp(s, "s")==0)
+		printf("%s\n", s);
+}
+	// delete(&head, 6);
+	// sort(head);
+	// printlist(head);
 
 	// int t;
 	// s(t)

@@ -6,55 +6,70 @@
 
 #define max(a, b) (a>b?a:b);
 #define p(x) printf("%d\n", x);
-#define p2(x, y, z) printf("%d %d %d\n", x, y, z);
+#define p2(x, y) printf("%d %d\n", x, y);
 #define s(x) scanf("%d", &x);
 
 int n, arr[20], count=0;
+typedef struct pair{
+	int l;
+	int r;
+} pair;
+
+
+int compare(const void *a, const void *b){
+	pair *temp1 = (pair*)a, *temp2 = (pair*)b;
+	return temp1->l-temp2->l;
+	
+	
+}
 
 int main(){
 	int t;
 	s(t)
 	while(t--){
 		s(n);
-		char *name[2] = {"IM", "CA"};
-		char *ans[n];
-		int arr[20], counter = 1, size = 0, count[2], flag = 1;
-		memset(arr, -1, sizeof(arr));
-		memset(count, 0, sizeof(count));
+		pair p[n];
 		for (int i = 0; i < n; ++i)
 		{
 			int a, b;
 			s(a)
 			s(b)
-			if((arr[a]!=-1 && arr[a]==(counter+1)%2) || (arr[b]!=-1 && arr[b]==(counter+1)%2))
-				{
-					ans[size++] = name[(counter+1)%2];
-					count[(counter+1)%2]++;
-				}
-			else
-				{
-					arr[a] = arr[b] = counter%2;
-					ans[size++] = name[counter%2];
-					count[(counter)%2]++;
-					counter++;
-				}
+			p[i].l = a, p[i].r = b;
+			/* code */
 		}
-		for (int i = 0; i < 2; ++i)
+		qsort(p, n, sizeof(pair), compare);
+		int ans[n], overlap[n];
+		memset(ans, 0, sizeof(ans));
+		memset(overlap, 0, sizeof(overlap));
+		
+		for (int i = 0; i < n; ++i)
 		{
-			if(n!=1 && count[i]==0)
+			if(overlap[i]==0){
+				// p2(100, i)
+				for (int j = i+1; j < n; ++j)
 				{
-					p(-1)
-					flag = 0;
+					if((p[i].r<p[j].l)){
+						ans[i] = 1-ans[i];
+					}
+					else{
+						// p2(200, j)
+						overlap[j] = 1;
+
+					}
+					/* code */
 				}
-		}
-		if(flag==1)
-		{	
-			for (int i = 0; i < size; ++i)
-			{
-				printf("%s ", ans[i]);
 			}
-			printf("\n");
+			/* code */
 		}
+		for (int i = 0; i < n; ++i)
+		{
+			if(ans[i]==0)
+				printf("CA ");
+			else
+				printf("IM ");
+			/* code */
+		}
+		printf("\n");
 	}
 }
 
