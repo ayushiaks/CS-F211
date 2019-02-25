@@ -8,15 +8,33 @@
 #define max(a, b) (a>b?a:b)
 
 
+
+int findMaxA(int n){
+	if(n<=6)
+		return n;
+	int screen[n]; 	
+	for(int i = 1; i<=6;i++){
+		screen[i] = i;
+	}
+
+
+	for (int i = 7; i<= n ; ++i)
+	{
+		screen[i] = 0;
+		for(int j = 1; j<i-2; j++){
+			int curr = (i-j-1)*screen[j]; 
+            if (curr > screen[i]) 
+                screen[i] = curr; 
+		}
+		
+		/* code */
+	}
+	return screen[n];
+}
+
+
 int main(){
 	int n;
 	s(n)
-	int ans = n;
-	for (int i = 1; i < n-2; ++i)
-	{
-		// p2(i, (n-i-2)*i+i)
-		ans = max(ans, (n-i-2)*i+i);
-		/* code */
-	}
-	p(ans)
+	p(findMaxA(n))
 }
