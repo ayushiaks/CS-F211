@@ -44,20 +44,17 @@ void ispal(char *s, int l, int r){
 			return;
 	if(ispalutil(s, l, r))
 	{
-
-		
 		int flag = 1, lo = l;
 		while(lo<(r+l)/2){
-			// p(l)
 			if(s[lo]>s[lo+1])
 				{
 					flag = 0;
-					return;
 				}
 				lo++;
 		}
+		
 		if(flag==1){
-			// p3(size, l, r)
+			
 				p[size].l = l, p[size].r = r;
 				size++;
 			}
@@ -72,8 +69,7 @@ void ispal(char *s, int l, int r){
 	// printf("after ");
 	// p2(l, r)
 	ispal(s, l, r-1);
-	// exit(0);
- 
+
 }
 
 int main(){
