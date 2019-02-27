@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<string.h>
 
+#define s(x) scanf("%d", &x);
 #define p(x) printf("%d\n", x);
 #define p2(x, y) printf("%d %d\n", x, y);
 #define p3(x, y, z) printf("%d %d %d\n", x, y, z);
@@ -12,29 +13,41 @@ typedef struct node{
 	int f;
 } node;
 
-void dfs(int i){
+void dfs(int i, int flag){
 	visited[i] = 1;
-	if(cat[i] && i!=1)
+	if(cat[i] && i!=1){
 		cat_count++;
-	
-	int flag = 0;
+		// printf("if %d %d\n", i, cat_count);
+	}
+	else{
+		// printf("else %d\n", i);
+		cat_count = k;
+	}
+	if(cat_count==m){
+		// p(i)
+		flag = 1;
+	}
+	int leaf = 1;
 	for (int j = 0; j <= v; ++j)
 	{
 		
 		if(!visited[j] && g[i][j]==1)
 			{
-				flag = 1;
-				// p2(56, j)
-				dfs(j);
-				// p3(i, j, cat_count)
-				if(cat_count<=m){	
-						// p(j)
-						count++;
-					}
-				if(i==1)
+				leaf = 0;
+				// p2(j, flag)
+				dfs(j, flag);
+			
+				if(i==1){
 					cat_count = k;
+				}
 			}
 				
+
+	}
+	if(cat_count<=m && leaf == 1 && flag == 0)
+	{	
+		p(i)
+		count++;
 
 	}
 	
@@ -42,27 +55,31 @@ void dfs(int i){
 		
 }
 
-void addEdge(int x, int y)
-{
-	g[x][y]=1;
-	// g[y][x]=1;
-}
 
 int main(){
-	m=1;
-	v =5;
-	addEdge(1, 2);
-	addEdge(2, 3);
-	addEdge(3, 4);
-	addEdge(1, 5);
-	cat[1] = 1, cat[2] = 1;
+	s(v)
+	s(m)
+	for (int i = 1; i <= v; ++i)
+	{
+		s(cat[i])
+		/* code */
+	}
+
+	for (int i = 1; i <= v-1; ++i)
+	{
+		int a, b;
+		s(a)
+		s(b)
+		g[a][b] = 1;
+		/* code */
+	}
 	k = cat[1];
 	cat_count = k;
 	for (int i = 1; i <= v; ++i)
 	{
 		if(!visited[i])
 		{
-			dfs(i);
+			dfs(i, 0);
 		}
 	}
 	p(count)
@@ -71,3 +88,24 @@ int main(){
 
 
 
+/*
+6
+2
+0 1 0 0 0 1
+1 2
+1 3
+1 4
+2 5
+5 6
+
+
+7
+2
+0 1 1 0 0 1 1
+1 2
+1 3
+1 4
+2 5
+5 6
+3 7
+*/
