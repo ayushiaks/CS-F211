@@ -25,6 +25,7 @@ int findMaxA(int n){
 			int curr = (i-j-1)*screen[j]; 
             if (curr > screen[i]) 
                 screen[i] = curr; 
+            
 		}
 		
 		/* code */
