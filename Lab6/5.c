@@ -33,31 +33,32 @@ void push(node** head, int new){
 	}
 
 
-void merge(node **head1, node **head2){
-	int new = 0;
-	node *a = *head1, *b = *head2;
-	node *preva = a, *prevb = b;
-	while(a!=NULL && b!=NULL){
-		if(a->data>b->data){
-			// preva = a;
-			preva->next = b;
-			b->next = a;
-			prevb = b;
-			b = b->next;
-			a = preva;
-			// a = a->next;
-		}
-		else
-			{	
-				preva = a;
-				a= a->next;
-			}
-	}
-	while(a!=NULL){
+struct node* SortedMerge(struct node* a, struct node* b)  
+{ 
+  struct node* result = NULL; 
+  // p(a->data)
+  /* Base cases */
+  if (a == NULL)  
+     return(b); 
+  else if (b==NULL)  
+     return(a); 
+  
+  /* Pick either a or b, and recur */
+  if (a->data <= b->data)  
+  { 
+     result = a; 
+     result->next = SortedMerge(a->next, b); 
+  } 
+  else 
+  { 
+     result = b; 
+     result->next = SortedMerge(a, b->next); 
+  } 
+  return(result); 
+} 
 
-	}
 
-}
+
 void printlist(node* head){
 	
 	while(head!=NULL){
@@ -70,7 +71,7 @@ void printlist(node* head){
 
 int main(){
 	int n, m, x;
-	node *head1 = NULL, *head2 = NULL;
+	node *head1 = NULL, *head2 = NULL, *res = NULL;
 	s(n)
 	for (int i = 0; i < n; ++i)
 	{
@@ -85,6 +86,8 @@ int main(){
 		push(&head2, x);
 		/* code */
 	}
-	merge(&head1, &head2);
-	printlist(head1);
+	
+	res = SortedMerge(head1, head2);
+	printlist(res);
 }
+	

@@ -1,111 +1,57 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<limits.h>
 #include<string.h>
 
-#define s(x) scanf("%d", &x);
-#define p(x) printf("%d\n", x);
-#define p2(x, y) printf("%d %d\n", x, y);
-#define p3(x, y, z) printf("%d %d %d\n", x, y, z);
+#define s(x) scanf("%d", &x)
+#define p(x) printf("%d ", x)
+#define f1(i,x,y) for(int i=x;i<y;i++)
+#define f2(i,x,y) for(int i=x;i<=y;i++)
 
-int v, k, g[10][10], cat_count, count, visited[10], cat[10], m;
-typedef struct node{
-	int val;
-	int f;
-} node;
+int adj[100][100], cats[100], vis[100], n, ans;
 
-void dfs(int i, int flag){
-	visited[i] = 1;
-	if(cat[i] && i!=1){
-		cat_count++;
-		// printf("if %d %d\n", i, cat_count);
-	}
-	else{
-		// printf("else %d\n", i);
-		cat_count = k;
-	}
-	if(cat_count==m){
-		// p(i)
-		flag = 1;
-	}
-	int leaf = 1;
-	for (int j = 0; j <= v; ++j)
-	{
-		
-		if(!visited[j] && g[i][j]==1)
-			{
-				leaf = 0;
-				// p2(j, flag)
-				dfs(j, flag);
-			
-				if(i==1){
-					cat_count = k;
-				}
-			}
-				
+void dfs(int x, int consec, int m)
+{
+    // printf("p: %d %d\n",x,consec);
+    if(cats[x])
+        consec++;
+    else
+        consec = 0;
+    if(consec>m)
+        return;
+    
+    vis[x] = 1;
+    int leaf = 1;
+    for(int i=1;i<=n;i++)
+    {
+        if(adj[x][i]&&!vis[i])
+        {
+            leaf = 0;
+            dfs(i,consec, m);
+        }
+    }
 
-	}
-	if(cat_count<=m && leaf == 1 && flag == 0)
-	{	
-		p(i)
-		count++;
-
-	}
-	
-	
-		
+    if(leaf)
+        ans++;
 }
 
+int main()
+{
+    int m;
+    s(n); s(m);
+    f2(i,1,n)
+        s(cats[i]);
 
-int main(){
-	s(v)
-	s(m)
-	for (int i = 1; i <= v; ++i)
-	{
-		s(cat[i])
-		/* code */
-	}
+    f1(i,0,n-1)
+    {
+        int x,y;
+        s(x); s(y);
+        adj[x][y] = 1;
+        adj[y][x] = 1;
+    }
 
-	for (int i = 1; i <= v-1; ++i)
-	{
-		int a, b;
-		s(a)
-		s(b)
-		g[a][b] = 1;
-		/* code */
-	}
-	k = cat[1];
-	cat_count = k;
-	for (int i = 1; i <= v; ++i)
-	{
-		if(!visited[i])
-		{
-			dfs(i, 0);
-		}
-	}
-	p(count)
-	
+    ans = 0;
+   
+    dfs(1,0,m); 
+    p(ans);
 }
-
-
-
-/*
-6
-2
-0 1 0 0 0 1
-1 2
-1 3
-1 4
-2 5
-5 6
-
-
-7
-2
-0 1 1 0 0 1 1
-1 2
-1 3
-1 4
-2 5
-5 6
-3 7
-*/

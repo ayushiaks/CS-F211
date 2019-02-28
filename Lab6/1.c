@@ -28,17 +28,34 @@ int main(){
 	{
 		for(int j = 0; j< n; j++){
 			s(g[i][j])
-			// p(g[i][j])
+			// if(g[i][j])
+			// 	p2(i, j)
 		}
 		/* code */
 	}
+	// for (int i = 0; i < n; ++i)
+	// {
+	// 	for(int j = 0; j< n; j++){
+	// 		if(g[i][j]==1){
+	// 			// p2(arr[i],arr[j])
+	// 		if(arr[j]<arr[i] && j>i){
+	// 			// printf("swap\n");
+	// 			swap(&arr[i], &arr[j]);
+	// 		}
+	// 	}
+							
+	// 	}
+	// }
+
 	for (int i = 0; i < n; ++i)
 	{
-		for(int j = 0; j< n; j++){
-			if(g[i][j]==1 && (arr[j]<arr[i] && j>i))
+		for (int j = i+1; j < n; ++j)
+		{
+			if(arr[j]<arr[i] && g[i][j]==1)
 				swap(&arr[i], &arr[j]);
-							
+			/* code */
 		}
+		/* code */
 	}
 	for (int i = 0; i < n; ++i)
 	{

@@ -20,6 +20,10 @@ char *s;
 
 int compare(const void *a, const void *b){
 	pair *t1 = (pair*)a, *t2 = (pair*)b;
+	while(s[t1->l]==s[t2->l]){
+		printf("%c\n",(s[t1->l]));
+		t1->l++;
+	}
 	return s[t1->l]-s[t2->l];
 }
 
@@ -88,5 +92,5 @@ int main(){
 		printf("%c", s[i]);
 		/* code */
 	}
-
+	
 }
