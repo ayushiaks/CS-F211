@@ -31,6 +31,7 @@ int main(){
 	}
 	
 	dfs(0, 0, alice, 0);
+	memset(vis, 0, sizeof(vis));
 	dfs(x-1, x-1, bob, 0);
 	for (int i = 0; i < n; ++i)
 	{

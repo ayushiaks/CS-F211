@@ -46,12 +46,9 @@ int main(){
 	m = k;
 	scanf("%c", &c);
 	scanf("%[^\n]", p);
-	// p[strlen(p)] = 'a';
 	permutation(p, "", s, k);
 	printf("%s\n", s);
 	p(strlen(s))
-	// s = "000001010011100101110111";
-	// printf("%s\n", s);
 	int ans[strlen(s)], size = 0, seen[100], num = 0;
 	memset(ans, 0, sizeof(ans));
 	memset(seen, 0, sizeof(ans));
@@ -66,11 +63,8 @@ int main(){
 			{
 				if(ans[j]==0){	
 					str[count] = s[j];
-					// printf("%c\n", str[j]);
 					count++;
 				}
-				// p3(i, j, (int)strlen(str))
-				// 
 				j++;
 				
 				/* code */
@@ -100,10 +94,8 @@ int main(){
 	{
 		if(ans[i]==0)
 			printf("%c", s[i]);
-		// p(anzshs[i])
-		/* code */
+		
 	}
-	p(atoi("ab"))
-	p('a'-97)
+	
 	
 }
