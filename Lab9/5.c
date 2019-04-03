@@ -98,6 +98,9 @@ void rearrange(char* str){
 		if(prev.freq>0){
 			if(isempty(&pq))
 			pq = newnode(prev.c, prev.freq);
+			else
+				push(&pq, prev.c, prev.freq);
+			
 		}
 		k.freq--;
 		prev = k;
