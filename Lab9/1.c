@@ -93,7 +93,6 @@ int main(){
             }
             if(t>at[i] && !vis[i]){
                 wait-=at[i];
-                vis[i] = 1;
             }
         }
         wait += t-time;
