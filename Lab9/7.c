@@ -24,7 +24,7 @@ void dfs(int s, int d, int k, int cost)
         {
             if(cost + g[s][i] > ans)
                 continue;
-            
+            printf("%d\n", i);
             dfs(i, d, k-1, cost+g[s][i]);
         }
     }
