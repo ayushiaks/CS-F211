@@ -93,6 +93,8 @@ int main(){
             }
             if(t>at[i] && !vis[i]){
                 wait-=at[i];
+                // visu[i] = 1;
+
             }
         }
         wait += t-time;
@@ -103,6 +105,7 @@ int main(){
             // printf("front ");
             // front(q1);
         }
+        
       printf("%lf\n", wait);
         
         
